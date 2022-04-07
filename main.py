@@ -12,6 +12,7 @@ with GCPCluster(on_host_maintenance="STOP", env_vars=dict(EXTRA_PIP_PACKAGES="py
             engine="pyarrow")
         start_time = time.time()
         df = df['repo_name'].explode()
+        df = df.value_counts()
         print(df.compute())
         print(f"time: {time.time() - start_time}")
         print(client)
