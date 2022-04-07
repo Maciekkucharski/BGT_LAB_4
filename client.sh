@@ -1,9 +1,9 @@
 sudo apt-get update
 sudo apt-get -y install python3 python3-pip git
+git clone https://github.com/Maciekkucharski/BGT_LAB_4.git
 pip install dask[complete]
 pip install pyarrow
 
-git clone https://github.com/Maciekkucharski/BGT_LAB_4.git
 cd BGT_LAB_4
 mkdir ~/data1
 gsutil -m cp gs://pjwstk-bigdata/*.parquet ./data1/.
