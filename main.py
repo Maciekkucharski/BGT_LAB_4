@@ -8,8 +8,8 @@ with GCPCluster(on_host_maintenance="STOP", env_vars=dict(EXTRA_PIP_PACKAGES="py
                 n_workers=3, machine_type="e2-small") as cluster:
     with Client(cluster) as client:
         df = dd.read_parquet(
-            ["./data1/new_*.parquet", "./data2/new_*.parquet", "./data3/new_*.parquet", "./data4/new_*.parquet"],
-            engine="pyarrow")
+            ["gs://buc21474bgt/data/*", "gs://buc21474bgt/data2/*", "gs://buc21474bgt/data3/*",
+             "gs://buc21474bgt/data4/*"], storage_options={'anon': True, 'use_ssl': False}, engine="pyarrow")
         start_time = time.time()
         df = df['repo_name'].explode()
         df = df.value_counts()
