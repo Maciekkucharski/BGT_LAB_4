@@ -10,3 +10,4 @@ gsutil -m cp gs://pjwstk-bigdata/*.parquet ./data1/.
 sudo cp -r ~/data1 ~/data2
 sudo cp -r ~/data1 ~/data3
 sudo cp -r ~/data1 ~/data4
+#dask-worker <iphere>:8786
