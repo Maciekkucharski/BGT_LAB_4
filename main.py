@@ -1,16 +1,17 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import dask.dataframe as dd
+from dask.distributed import Client
+import time
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+client = Client("<insert_ip_v4>:8786")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+df = dd.read_parquet('data*/new_*.parquet', engine="pyarrow")
+
+start_time = time.time()
+df = df['repo_name'].explode()
+df = df.value_counts(ascending=True)
+print(df.compute())
+print(f"time: {time.time() - start_time}")
+
+print(client)
+
